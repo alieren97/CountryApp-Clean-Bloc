@@ -1,4 +1,4 @@
-import 'package:countries/presentation/countries/bloc/country_bloc_imports.dart';
+import 'package:countries/presentation/countries/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 
 class CountrySearchField extends StatefulWidget {
@@ -25,8 +25,12 @@ class _CountrySearchFieldState extends State<CountrySearchField> {
           hintText: "Search Country Name",
           border: InputBorder.none,
         ),
-        onChanged: (value) {
-          context.read<CountryBloc>().add(GetSearchedCountries(text: value));
+        onChanged: (String? newSearchTerm) {
+          if (newSearchTerm != null) {
+            context
+                .read<SearchCountryBloc>()
+                .add(SetSearchTermEvent(newSearchItem: newSearchTerm));
+          }
         },
       ),
     );

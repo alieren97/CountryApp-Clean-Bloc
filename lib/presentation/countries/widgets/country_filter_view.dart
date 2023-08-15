@@ -1,6 +1,6 @@
-import 'package:countries/presentation/countries/bloc/country_bloc_imports.dart';
 import 'package:countries/presentation/countries/widgets/country_search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:countries/presentation/countries/blocs/blocs.dart';
 
 class CountryFilterView extends StatefulWidget {
   const CountryFilterView({super.key});
@@ -10,16 +10,7 @@ class CountryFilterView extends StatefulWidget {
 }
 
 class _CountryFilterViewState extends State<CountryFilterView> {
-  final List<String> _items = [
-    'All',
-    'Europe',
-    'Asia',
-    'Americas',
-    'Africa',
-    'Oceania',
-    'Antarctic'
-  ];
-  String? selectedItem = "All";
+  String selectedItem = "ALL";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,19 +32,19 @@ class _CountryFilterViewState extends State<CountryFilterView> {
                 PopupMenuButton(
                   icon: const Icon(Icons.menu),
                   itemBuilder: (context) {
-                    return _items.map((item) {
+                    return Filter.values.map((item) {
                       return PopupMenuItem(
                         value: item,
-                        child: Text(item),
+                        child: Text(item.name.toUpperCase()),
                       );
                     }).toList();
                   },
                   onSelected: (item) {
                     context
-                        .read<CountryBloc>()
-                        .add(GetSortedCountries(continent: item));
+                        .read<FilterCountryBloc>()
+                        .add(ChangeFilterEvent(newFilter: item));
                     setState(() {
-                      selectedItem = item;
+                      selectedItem = item.name.toUpperCase();
                     });
                   },
                 ),
