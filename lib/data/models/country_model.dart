@@ -2,28 +2,22 @@
 import 'package:countries/domain/entities/country.dart';
 
 class CountryModel extends Country {
+  
   final CountryNameModel? name;
   final String? region;
   final String? subRegion;
   final String? flag;
   final CountryFlagsModel? flags;
 
-  CountryModel({ 
-    this.name,
-    this.region,
-    this.subRegion,
-    this.flag,
-    this.flags
-  });
+  const CountryModel({this.name, this.region, this.subRegion, this.flag, this.flags});
 
   factory CountryModel.fromJson(Map<String, dynamic> map) {
     return CountryModel(
-      name: CountryNameModel.fromJson(map['name']),
-      region: map['region'],
-      subRegion: map['subregion'],
-      flag: map['flag'],
-      flags: CountryFlagsModel.fromJson(map['flags'])
-    );
+        name: CountryNameModel.fromJson(map['name']),
+        region: map['region'],
+        subRegion: map['subregion'],
+        flag: map['flag'],
+        flags: CountryFlagsModel.fromJson(map['flags']));
   }
 }
 
@@ -32,14 +26,10 @@ class CountryFlagsModel extends CountryFlags {
   final String? svg;
   final String? alt;
 
-  CountryFlagsModel({this.png, this.svg, this.alt});  
+  CountryFlagsModel({this.png, this.svg, this.alt});
 
   factory CountryFlagsModel.fromJson(Map<String, dynamic> map) {
-    return CountryFlagsModel(
-      png: map['png'],
-      svg: map['svg'],
-      alt: map['alt']
-    );
+    return CountryFlagsModel(png: map['png'], svg: map['svg'], alt: map['alt']);
   }
 }
 
@@ -49,7 +39,7 @@ class CountryNameModel extends CountryName {
 
   const CountryNameModel({this.common, this.official});
 
-   factory CountryNameModel.fromJson(Map<String, dynamic> map) {
+  factory CountryNameModel.fromJson(Map<String, dynamic> map) {
     return CountryNameModel(
       common: map['common'],
       official: map['official'],

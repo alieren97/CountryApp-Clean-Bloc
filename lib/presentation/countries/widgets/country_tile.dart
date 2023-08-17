@@ -1,4 +1,5 @@
 import 'package:countries/domain/entities/country.dart';
+import 'package:countries/presentation/countries/blocs/blocs.dart';
 import 'package:countries/presentation/country_detail/views/country_detail_view.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +18,12 @@ class CountryTile extends StatelessWidget {
       leading: Text(country.flag!, style: const TextStyle(fontSize: 26)),
       trailing: const Icon(Icons.favorite_border),
       onTap: () {
+        context
+            .read<SelectedCountryBloc>()
+            .add(SelectCountryEvent(country: country));
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => CountryDetailView(
-                    country: country,
-                  )),
+          MaterialPageRoute(builder: (context) => CountryDetailView()),
         );
       },
     );

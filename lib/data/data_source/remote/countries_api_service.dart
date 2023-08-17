@@ -11,4 +11,8 @@ abstract class CountriesApiService {
 
   @GET("/all")
   Future<HttpResponse<List<CountryModel>>> getCountries();
+
+  @GET("/name/{name}?fullText=true")
+  Future<HttpResponse<List<CountryModel>>> getCountryDetail(
+      @Path("name") String name);
 }
